@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{79D6C1FD-56D4-4303-8073-0F1E40EB4C62}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanchoneteDaRua.Ms.Pedidos.Api", "src\LanchoneteDaRua.Ms.Pedidos.Api\LanchoneteDaRua.Ms.Pedidos.Api.csproj", "{0C7DA7DE-6397-426C-87EE-FE73FFAFCCAB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanchoneteDaRua.Ms.Pedidos.Application", "src\LanchoneteDaRua.Ms.Pedidos.Application\LanchoneteDaRua.Ms.Pedidos.Application.csproj", "{96A07714-59E3-4567-9E58-7E91C1BDE66B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanchoneteDaRua.Ms.Pedidos.Domain", "src\LanchoneteDaRua.Ms.Pedidos.Domain\LanchoneteDaRua.Ms.Pedidos.Domain.csproj", "{09771FA5-D94F-4572-B2FA-68AF99AFB31B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanchoneteDaRua.Ms.Pedidos.Infrastructure", "src\LanchoneteDaRua.Ms.Pedidos.Infrastructure\LanchoneteDaRua.Ms.Pedidos.Infrastructure.csproj", "{2E8EE301-5275-450A-8BE8-5597668CA13E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{ABFE31D4-B3E9-45AB-B8CD-067983F62889}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LanchoneteDaRua.Ms.Pedidos.Tests", "test\LanchoneteDaRua.Ms.Pedidos.Tests\LanchoneteDaRua.Ms.Pedidos.Tests.csproj", "{2317788B-F702-4BC1-835E-677600CDAB64}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{0C7DA7DE-6397-426C-87EE-FE73FFAFCCAB} = {79D6C1FD-56D4-4303-8073-0F1E40EB4C62}
+		{96A07714-59E3-4567-9E58-7E91C1BDE66B} = {79D6C1FD-56D4-4303-8073-0F1E40EB4C62}
+		{09771FA5-D94F-4572-B2FA-68AF99AFB31B} = {79D6C1FD-56D4-4303-8073-0F1E40EB4C62}
+		{2E8EE301-5275-450A-8BE8-5597668CA13E} = {79D6C1FD-56D4-4303-8073-0F1E40EB4C62}
+		{2317788B-F702-4BC1-835E-677600CDAB64} = {ABFE31D4-B3E9-45AB-B8CD-067983F62889}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C7DA7DE-6397-426C-87EE-FE73FFAFCCAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0C7DA7DE-6397-426C-87EE-FE73FFAFCCAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0C7DA7DE-6397-426C-87EE-FE73FFAFCCAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0C7DA7DE-6397-426C-87EE-FE73FFAFCCAB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96A07714-59E3-4567-9E58-7E91C1BDE66B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96A07714-59E3-4567-9E58-7E91C1BDE66B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96A07714-59E3-4567-9E58-7E91C1BDE66B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96A07714-59E3-4567-9E58-7E91C1BDE66B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{09771FA5-D94F-4572-B2FA-68AF99AFB31B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{09771FA5-D94F-4572-B2FA-68AF99AFB31B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{09771FA5-D94F-4572-B2FA-68AF99AFB31B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{09771FA5-D94F-4572-B2FA-68AF99AFB31B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2E8EE301-5275-450A-8BE8-5597668CA13E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2E8EE301-5275-450A-8BE8-5597668CA13E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2E8EE301-5275-450A-8BE8-5597668CA13E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2E8EE301-5275-450A-8BE8-5597668CA13E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2317788B-F702-4BC1-835E-677600CDAB64}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2317788B-F702-4BC1-835E-677600CDAB64}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2317788B-F702-4BC1-835E-677600CDAB64}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2317788B-F702-4BC1-835E-677600CDAB64}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
