@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.BuscarFilaDePedidos;
+﻿using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.BuscarPedidosPorStatus;
 using LanchoneteDaRua.Ms.Pedidos.Domain.Entities;
 using LanchoneteDaRua.Ms.Pedidos.Domain.Enums;
 using LanchoneteDaRua.Ms.Pedidos.Domain.Repositories;
@@ -15,9 +11,9 @@ namespace LanchoneteDaRua.Ms.Pedidos.Tests.Application.UseCases.BuscarFilaDePedi
 [Binding]
 public sealed class BuscarFilaDePedidosSteps
 {
-    private BuscarFilaDePedidosHandler _handler;
+    private BuscarPedidosPorStatusHandler _handler;
     private BuscarPedidosPorStatusInput _input;
-    private BuscarPedidosPorStatusOutPut _output;
+    private BuscarPedidosPorStatusOutput _output;
     private readonly Mock<IPedidoRepository> _mockPedidoRepository;
     private List<Pedido> _pedidosMock;
 
@@ -37,7 +33,7 @@ public sealed class BuscarFilaDePedidosSteps
     [When(@"eu buscar pela fila de pedidos")]
     public async Task QuandoEuBuscarPelaFilaDePedidos()
     {
-        _handler = new BuscarFilaDePedidosHandler(_mockPedidoRepository.Object);
+        _handler = new BuscarPedidosPorStatusHandler(_mockPedidoRepository.Object);
         _input = new BuscarPedidosPorStatusInput(); 
         _output = await _handler.Handle(_input, new CancellationToken());
     }
@@ -47,7 +43,7 @@ public sealed class BuscarFilaDePedidosSteps
     {
         var emPreparacao = _pedidosMock.Count(p => p.Status == PedidoStatus.Empreparacao);
         Assert.NotNull(_output);
-        Assert.Equal(emPreparacao, _output.PedidosNaFila.Count);
-        Assert.IsAssignableFrom<BuscarPedidosPorStatusOutPut>(_output);
+        Assert.Equal(emPreparacao, _output.Pedidos.Count);
+        Assert.IsAssignableFrom<BuscarPedidosPorStatusOutput>(_output);
     }
 }

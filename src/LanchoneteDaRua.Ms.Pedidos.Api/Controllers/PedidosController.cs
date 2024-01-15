@@ -50,7 +50,7 @@ public class PedidosController : ControllerBase
         return Ok(output);
     }
     
-    [HttpGet("status/{status:PedidoStatus}")]
+    [HttpGet("status/{Status}")]
     [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BuscarPedidosPorStatusOutput))]
     [SwaggerOperation(Summary = "Busca um pedido por status")]
     public async Task<IActionResult> BuscarPedidosNaFila([FromRoute]BuscarPedidosPorStatusInput input)
@@ -83,7 +83,7 @@ public class PedidosController : ControllerBase
     [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(Response))]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    [SwaggerOperation(Summary = "Atualizar um pedido")]
+    [SwaggerOperation(Summary = "Atualizar status de um pedido")]
     public async Task<IActionResult> AtualizarStatusPedido([FromRoute] AtualizarStatusPedidoInput input)
     {
         var output = await _mediator.Send(input);

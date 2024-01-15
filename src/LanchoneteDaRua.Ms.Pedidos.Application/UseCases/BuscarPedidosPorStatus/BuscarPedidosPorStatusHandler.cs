@@ -2,11 +2,11 @@
 
 namespace LanchoneteDaRua.Ms.Pedidos.Application.UseCases.BuscarPedidosPorStatus;
 
-public class BuscarFilaDePedidosHandler : AbstractHandler<BuscarPedidosPorStatusInput, BuscarPedidosPorStatusOutput>
+public class BuscarPedidosPorStatusHandler : AbstractHandler<BuscarPedidosPorStatusInput, BuscarPedidosPorStatusOutput>
 {
     private readonly IPedidoRepository _pedidoRepository;
 
-    public BuscarFilaDePedidosHandler(IPedidoRepository pedidoRepository)
+    public BuscarPedidosPorStatusHandler(IPedidoRepository pedidoRepository)
     {
         _pedidoRepository = pedidoRepository;
     }
