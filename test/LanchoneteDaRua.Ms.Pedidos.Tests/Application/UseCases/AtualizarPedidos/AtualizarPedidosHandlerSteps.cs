@@ -1,5 +1,4 @@
-﻿using Bogus;
-using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.AtualizarPedido;
+﻿using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.AtualizarPedido;
 using LanchoneteDaRua.Ms.Pedidos.Domain.Entities;
 using LanchoneteDaRua.Ms.Pedidos.Domain.Repositories;
 using LanchoneteDaRua.Ms.Pedidos.Infrastructure.MessageBus;

@@ -1,10 +1,12 @@
-﻿using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.AtualizarPedido;
+﻿using LanchoneteDaRua.Ms.Pedidos.Application.UseCases;
+using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.AtualizarPedido;
 using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.AtualizarStatusPedido;
-using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.BuscarFilaDePedidos;
 using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.BuscarPedidoPorId;
+using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.BuscarPedidosPorStatus;
 using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.CriarPedido;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Swashbuckle.AspNetCore.Annotations;
 
 namespace LanchoneteDaRua.Ms.Pedidos.Api.Controllers;
 
@@ -20,6 +22,9 @@ public class PedidosController : ControllerBase
     }
 
     [HttpPost]
+    [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(CriarPedidoOutput))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(CriarPedidoOutput))]
+    [SwaggerOperation(Summary = "Cria um pedido")]
     public async Task<IActionResult> CriarPedido(CriarPedidoInput input)
     {
         var output = await _mediator.Send(input);
@@ -31,6 +36,10 @@ public class PedidosController : ControllerBase
     }
 
     [HttpGet("{Id:Guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BuscarPedidoPorIdInput))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [SwaggerOperation(Summary = "Busca um pedido por id")]
     public async Task<IActionResult> BuscarPorId([FromRoute] BuscarPedidoPorIdInput input)
     {
         var output = await _mediator.Send(input);
@@ -41,8 +50,10 @@ public class PedidosController : ControllerBase
         return Ok(output);
     }
     
-    [HttpGet("fila")]
-    public async Task<IActionResult> BuscarPedidosNaFila(BuscarFilaDePedidosInput input)
+    [HttpGet("status/{status:PedidoStatus}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(BuscarPedidosPorStatusOutput))]
+    [SwaggerOperation(Summary = "Busca um pedido por status")]
+    public async Task<IActionResult> BuscarPedidosNaFila([FromRoute]BuscarPedidosPorStatusInput input)
     {
         var output = await _mediator.Send(input);
 
@@ -53,6 +64,10 @@ public class PedidosController : ControllerBase
     }
     
     [HttpPut("{id:Guid}")]
+    [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(AtualizarPedidoOutput))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [SwaggerOperation(Summary = "Atualizar um pedido")]
     public async Task<IActionResult> AtualizarPedido([FromBody] AtualizarPedidoInput input, [FromRoute] Guid id)
     {
         input.Id = id;
@@ -65,6 +80,10 @@ public class PedidosController : ControllerBase
     }
     
     [HttpPatch("{Id:Guid}")]
+    [ProducesResponseType(StatusCodes.Status202Accepted, Type = typeof(Response))]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [SwaggerOperation(Summary = "Atualizar um pedido")]
     public async Task<IActionResult> AtualizarStatusPedido([FromRoute] AtualizarStatusPedidoInput input)
     {
         var output = await _mediator.Send(input);

@@ -1,14 +1,14 @@
 ﻿using LanchoneteDaRua.Ms.Pedidos.Domain.Entities;
 
-namespace LanchoneteDaRua.Ms.Pedidos.Application.UseCases.BuscarFilaDePedidos;
+namespace LanchoneteDaRua.Ms.Pedidos.Application.UseCases.BuscarPedidosPorStatus;
 
-public class BuscarFilaDePedidosOutPut : Response
+public class BuscarPedidosPorStatusOutput : Response
 {
     public List<PedidosFila> PedidosNaFila { get; set; }
 
-    public static BuscarFilaDePedidosOutPut FromModelList(List<Pedido> pedidos)
+    public static BuscarPedidosPorStatusOutput FromModelList(List<Pedido> pedidos)
     {
-        return new BuscarFilaDePedidosOutPut
+        return new BuscarPedidosPorStatusOutput
         {
             PedidosNaFila = PedidosFila.FromModelList(pedidos)
         };

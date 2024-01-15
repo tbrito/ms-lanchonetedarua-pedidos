@@ -16,8 +16,8 @@ namespace LanchoneteDaRua.Ms.Pedidos.Tests.Application.UseCases.BuscarFilaDePedi
 public sealed class BuscarFilaDePedidosSteps
 {
     private BuscarFilaDePedidosHandler _handler;
-    private BuscarFilaDePedidosInput _input;
-    private BuscarFilaDePedidosOutPut _output;
+    private BuscarPedidosPorStatusInput _input;
+    private BuscarPedidosPorStatusOutPut _output;
     private readonly Mock<IPedidoRepository> _mockPedidoRepository;
     private List<Pedido> _pedidosMock;
 
@@ -38,7 +38,7 @@ public sealed class BuscarFilaDePedidosSteps
     public async Task QuandoEuBuscarPelaFilaDePedidos()
     {
         _handler = new BuscarFilaDePedidosHandler(_mockPedidoRepository.Object);
-        _input = new BuscarFilaDePedidosInput(); 
+        _input = new BuscarPedidosPorStatusInput(); 
         _output = await _handler.Handle(_input, new CancellationToken());
     }
 
@@ -48,6 +48,6 @@ public sealed class BuscarFilaDePedidosSteps
         var emPreparacao = _pedidosMock.Count(p => p.Status == PedidoStatus.Empreparacao);
         Assert.NotNull(_output);
         Assert.Equal(emPreparacao, _output.PedidosNaFila.Count);
-        Assert.IsAssignableFrom<BuscarFilaDePedidosOutPut>(_output);
+        Assert.IsAssignableFrom<BuscarPedidosPorStatusOutPut>(_output);
     }
 }
