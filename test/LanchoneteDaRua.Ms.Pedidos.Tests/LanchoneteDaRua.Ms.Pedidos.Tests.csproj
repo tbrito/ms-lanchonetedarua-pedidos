@@ -25,18 +25,22 @@
             <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
             <PrivateAssets>all</PrivateAssets>
         </PackageReference>
+        <PackageReference Include="coverlet.msbuild" Version="6.0.0">
+            <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+            <PrivateAssets>all</PrivateAssets>
+        </PackageReference>
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\LanchoneteDaRua.Ms.Pedidos.Api\LanchoneteDaRua.Ms.Pedidos.Api.csproj" />
-      <ProjectReference Include="..\..\src\LanchoneteDaRua.Ms.Pedidos.Application\LanchoneteDaRua.Ms.Pedidos.Application.csproj" />
-      <ProjectReference Include="..\..\src\LanchoneteDaRua.Ms.Pedidos.Domain\LanchoneteDaRua.Ms.Pedidos.Domain.csproj" />
-      <ProjectReference Include="..\..\src\LanchoneteDaRua.Ms.Pedidos.Infrastructure\LanchoneteDaRua.Ms.Pedidos.Infrastructure.csproj" />
+        <ProjectReference Include="..\..\src\LanchoneteDaRua.Ms.Pedidos.Api\LanchoneteDaRua.Ms.Pedidos.Api.csproj" />
+        <ProjectReference Include="..\..\src\LanchoneteDaRua.Ms.Pedidos.Application\LanchoneteDaRua.Ms.Pedidos.Application.csproj" />
+        <ProjectReference Include="..\..\src\LanchoneteDaRua.Ms.Pedidos.Domain\LanchoneteDaRua.Ms.Pedidos.Domain.csproj" />
+        <ProjectReference Include="..\..\src\LanchoneteDaRua.Ms.Pedidos.Infrastructure\LanchoneteDaRua.Ms.Pedidos.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Api\" />
-      <Folder Include="Infrastructure\Repository\" />
+        <Folder Include="Api\" />
+        <Folder Include="Infrastructure\Repository\" />
     </ItemGroup>
 
 </Project>
