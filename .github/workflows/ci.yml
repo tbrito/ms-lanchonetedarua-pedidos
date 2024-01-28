@@ -1,0 +1,80 @@
+name: Pedidos CI
+
+on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - '**.cs'
+      - '**.csproj'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Build and Test
+        id: test
+        run: |
+          dotnet restore
+          dotnet build --configuration Release
+          dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/ /p:Exclude="[xunit.*]*"
+
+      - name: Check Code Coverage
+        run: |
+          coverage=$(awk -F 'sequenceCoverage="' 'NR>2 {split($2, a, "\""); print a[1]; exit}' ./test/LanchoneteDaRua.Ms.Pedidos.Tests/TestResults/coverage.opencover.xml)
+          if (( $(echo "$coverage >= 80" | bc -l) )); then
+            echo "Code coverage is greater than or equal to 80%."
+          else
+            echo "Code coverage is less than 80%."
+            exit 1
+          fi
+
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+          aws-region: us-east-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v1
+
+      - name: Build, tag, and push image to Amazon ECR
+        id: build-image
+        env:
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPOSITORY: lanchonete-da-rua-pedidos
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t ${ECR_REPOSITORY}:latest ./
+          docker tag ${ECR_REPOSITORY}:latest ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
+          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin ${ECR_REGISTRY}
+          docker push ${ECR_REGISTRY}/${ECR_REPOSITORY}:${IMAGE_TAG}
+

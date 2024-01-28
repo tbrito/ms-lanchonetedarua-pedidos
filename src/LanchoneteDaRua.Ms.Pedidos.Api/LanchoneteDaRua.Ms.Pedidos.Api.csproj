@@ -17,14 +17,12 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Content Include="..\.dockerignore">
-        <Link>.dockerignore</Link>
-      </Content>
+      <ProjectReference Include="..\LanchoneteDaRua.Ms.Pedidos.Application\LanchoneteDaRua.Ms.Pedidos.Application.csproj" />
+      <ProjectReference Include="..\LanchoneteDaRua.Ms.Pedidos.Infrastructure\LanchoneteDaRua.Ms.Pedidos.Infrastructure.csproj" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\LanchoneteDaRua.Ms.Pedidos.Application\LanchoneteDaRua.Ms.Pedidos.Application.csproj" />
-      <ProjectReference Include="..\LanchoneteDaRua.Ms.Pedidos.Infrastructure\LanchoneteDaRua.Ms.Pedidos.Infrastructure.csproj" />
+      <None Remove="Dockerfile" />
     </ItemGroup>
 
 </Project>
