@@ -2,8 +2,7 @@ name: Pedidos CI
 
 on:
   push:
-    branches:
-      - main
+    branches: [ "main" ]
     paths:
       - '**.cs'
       - '**.csproj'
