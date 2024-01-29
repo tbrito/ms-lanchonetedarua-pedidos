@@ -1,4 +1,5 @@
-﻿using LanchoneteDaRua.Ms.Pedidos.Application.UseCases;
+﻿using System.Diagnostics.CodeAnalysis;
+using LanchoneteDaRua.Ms.Pedidos.Application.UseCases;
 using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.AtualizarPedido;
 using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.AtualizarStatusPedido;
 using LanchoneteDaRua.Ms.Pedidos.Application.UseCases.BuscarPedidoPorId;
@@ -12,6 +13,7 @@ namespace LanchoneteDaRua.Ms.Pedidos.Api.Controllers;
 
 [ApiController]
 [Route("api/v1/[controller]")]
+[ExcludeFromCodeCoverage]
 public class PedidosController : ControllerBase
 {
     private readonly IMediator _mediator;
