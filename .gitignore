@@ -13,7 +13,9 @@ develop-eggs/
 dist/
 downloads/
 eggs/
+obj/
 .eggs/
+.vs/
 lib/
 lib64/
 parts/
