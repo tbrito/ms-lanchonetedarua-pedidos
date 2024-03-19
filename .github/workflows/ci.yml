@@ -1,12 +1,10 @@
 name: Pedidos CI
 
-#rr
+#rr55
 on:
   push:
-    branches: [ "main" ]
-    paths:
-      - '**.cs'
-      - '**.csproj'
+    branches:
+      - main
 
 jobs:
   build:
