@@ -42,39 +42,25 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
-  deploy:
+  build-and-deploy:
     needs: build
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+    # checkout the repo
+    - name: 'Checkout GitHub Action'
+      uses: actions/checkout@main
 
-      - name: Configure AWS credentials
-        uses: aws-actions/configure-aws-credentials@v4
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          # aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
-          aws-region: us-east-1
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Build Docker image
-        run: |
-          docker build -t ms-lanchonetedarua-pedidos:latest .
-        env:
-          AWS_DEFAULT_REGION: us-east-1
-    
-      - name: Push Docker image to ECR
-        run: |
-          # Login ECR
-          aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 339713163875.dkr.ecr.us-east-1.amazonaws.com
-          
-          # Image tag
-          docker tag ms-lanchonetedarua-pedidos:latest 339713163875.dkr.ecr.us-east-1.amazonaws.com/lanchonetedarua:ms-lanchonetedarua-pedidos-latest
-          
-          # Publish image to ecr
-          docker push 339713163875.dkr.ecr.us-east-1.amazonaws.com/lanchonetedarua:ms-lanchonetedarua-pedidos-latest
-        env:
-          AWS_DEFAULT_REGION: us-east-1
-    
-
+    - name: 'Build and push image'
+      uses: azure/docker-login@v1
+      with:
+        login-server: ${{ secrets.REGISTRY_LOGIN_SERVER }}
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build . -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/ms-lanchonetedarua-pedidos:${{ github.sha }}
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/ms-lanchonetedarua-pedidos:${{ github.sha }}
