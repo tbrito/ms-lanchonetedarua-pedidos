@@ -32,7 +32,7 @@ public class InfraestruturaSteps
     [When(@"adiciono o módulo de infraestrutura")]
     public void QuandoAdicionoAConfiguracaoDoMongoDB()
     {
-        _services.AddInfraestructureLayer();
+        _services.AddInfraestructureLayer(_configuration);
         _provider = _services.BuildServiceProvider();
     }
 
