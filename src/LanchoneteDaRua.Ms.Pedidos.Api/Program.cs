@@ -6,6 +6,9 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
+string connectionString = builder.Configuration.GetConnectionString("AppConfig");
+builder.Configuration.AddAzureAppConfiguration(connectionString);
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
@@ -13,7 +16,7 @@ builder.Services.AddSwaggerGen(c =>
 });
 builder.Services.AddApiLayer();
 builder.Services.AddApplicationLayer();
-builder.Services.AddInfraestructureLayer();
+builder.Services.AddInfraestructureLayer(builder.Configuration);
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {

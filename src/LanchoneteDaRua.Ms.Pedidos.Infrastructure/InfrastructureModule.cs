@@ -1,8 +1,10 @@
-﻿using Amazon.SQS;
+﻿using Amazon.Runtime;
+using Amazon.SQS;
 using LanchoneteDaRua.Ms.Pedidos.Domain.Repositories;
 using LanchoneteDaRua.Ms.Pedidos.Infrastructure.Database;
 using LanchoneteDaRua.Ms.Pedidos.Infrastructure.MessageBus;
 using LanchoneteDaRua.Ms.Pedidos.Infrastructure.Repository;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
@@ -12,12 +14,12 @@ namespace LanchoneteDaRua.Ms.Pedidos.Infrastructure;
 
 public static class InfrastructureModule
 {
-    public static IServiceCollection AddInfraestructureLayer(this IServiceCollection services)
+    public static IServiceCollection AddInfraestructureLayer(this IServiceCollection services, IConfiguration configuration)
     {
         services
             .AddMongo()
             .AddRepositories()
-            .AddMessageBus();
+            .AddMessageBus(configuration);
 
         return services;
     }
@@ -58,13 +60,16 @@ public static class InfrastructureModule
         return services;
     }
 
-    private static IServiceCollection AddMessageBus(this IServiceCollection services)
+    private static IServiceCollection AddMessageBus(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddScoped<IEventProcessor, EventProcessor>();
         services.AddScoped<IMessageBusClient, AwsSqsClient>();
+
         services.AddSingleton<IAmazonSQS, AmazonSQSClient>(serviceProvider =>
         {
-            return new AmazonSQSClient(Amazon.RegionEndpoint.USEast1);
+            var clientId = configuration.GetSection("AWS:ClientId").Value;
+            var clientSecreat = configuration.GetSection("AWS:ClientSecret").Value;
+            return new AmazonSQSClient(new BasicAWSCredentials(clientId, clientSecreat), Amazon.RegionEndpoint.USEast1);
         });
         return services;
     }
