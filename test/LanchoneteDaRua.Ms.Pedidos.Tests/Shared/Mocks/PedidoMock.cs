@@ -106,7 +106,7 @@ public static class PedidoMock
         return new AtualizarStatusPedidoInput
         {
             PedidoId = Id,
-            StatusPagamento = PedidoStatus.Recebido
+            StatusPagamento = "Recebido"
         };
     }
 }
