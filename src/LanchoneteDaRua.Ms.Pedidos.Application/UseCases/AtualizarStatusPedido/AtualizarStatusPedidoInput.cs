@@ -6,7 +6,8 @@ namespace LanchoneteDaRua.Ms.Pedidos.Application.UseCases.AtualizarStatusPedido;
 
 public class AtualizarStatusPedidoInput : IRequest<Response>
 {
-    public Guid Id { get; set; }
-    [JsonIgnore]
-    public PedidoStatus? Status { get; set; }
+    public Guid PedidoId { get; set; }
+    
+
+    public string StatusPagamento { get; set; }
 }

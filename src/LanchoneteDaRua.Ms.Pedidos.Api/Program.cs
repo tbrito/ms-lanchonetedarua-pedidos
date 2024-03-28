@@ -3,6 +3,8 @@ using LanchoneteDaRua.Ms.Pedidos.Api;
 using LanchoneteDaRua.Ms.Pedidos.Application;
 using LanchoneteDaRua.Ms.Pedidos.Infrastructure;
 using System.Text.Json.Serialization;
+using LanchoneteDaRua.Ms.Pedidos.Infrastructure.HostedService.PagamentosProcessados;
+using LanchoneteDaRua.Ms.Pedidos.Infrastructure.MessageBus;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,9 +16,12 @@ builder.Services.AddSwaggerGen(c =>
 {
     c.UseInlineDefinitionsForEnums();
 });
+
 builder.Services.AddApiLayer();
 builder.Services.AddApplicationLayer();
 builder.Services.AddInfraestructureLayer(builder.Configuration);
+
+builder.Services.AddHostedService<SqsHostedService>();
 
 builder.Services.AddControllers().AddJsonOptions(options =>
 {

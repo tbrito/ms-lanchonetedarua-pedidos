@@ -16,9 +16,18 @@ public class AtualizarStatusPedidoHandler : AbstractHandler<AtualizarStatusPedid
 
     public override async Task<Response> Handle(AtualizarStatusPedidoInput request, CancellationToken cancellationToken)
     {
-        var pedido = await _pedidoRepository.BuscarPedidoPorIdAsync(request.Id);
+        var pedido = await _pedidoRepository.BuscarPedidoPorIdAsync(request.PedidoId);
 
-        if (request.Status != PedidoStatus.PagamentoRejeitado)
+        if (pedido is null)
+        {
+            return new Response
+            {
+                ErrorCode = HttpStatusCode.InternalServerError,
+                ErrorMessages = $"Erro ao criar pedido - não encontrou pedido " + request.PedidoId
+            };
+        }
+
+        if (request.StatusPagamento != "NEGADO")
         {
             pedido.AvancarParaProximoEstado();
         }

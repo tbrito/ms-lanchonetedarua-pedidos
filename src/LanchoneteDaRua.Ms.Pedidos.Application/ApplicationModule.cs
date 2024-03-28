@@ -1,5 +1,7 @@
 ﻿using LanchoneteDaRua.Ms.Pedidos.Application.UseCases;
+using LanchoneteDaRua.Ms.Pedidos.Infrastructure.HostedService.PagamentosProcessados;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 
 namespace LanchoneteDaRua.Ms.Pedidos.Application;
 
