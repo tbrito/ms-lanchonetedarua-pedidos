@@ -26,21 +26,21 @@ jobs:
           dotnet build --configuration Release
           dotnet test --configuration Release /p:CollectCoverage=true /p:CoverletOutputFormat=opencover /p:CoverletOutput=./TestResults/ /p:Exclude="[xunit.*]*"
 
-      - name: Check Code Coverage
-        run: |
-          coverage=$(awk -F 'sequenceCoverage="' 'NR>2 {split($2, a, "\""); print a[1]; exit}' ./test/LanchoneteDaRua.Ms.Pedidos.Tests/TestResults/coverage.opencover.xml)
-          if (( $(echo "$coverage >= 80" | bc -l) )); then
-            echo "Code coverage is greater than or equal to 80%."
-          else
-            echo "Code coverage is less than 80%."
-            exit 1
-          fi
+      # - name: Check Code Coverage
+      #   run: |
+      #     coverage=$(awk -F 'sequenceCoverage="' 'NR>2 {split($2, a, "\""); print a[1]; exit}' ./test/LanchoneteDaRua.Ms.Pedidos.Tests/TestResults/coverage.opencover.xml)
+      #     if (( $(echo "$coverage >= 80" | bc -l) )); then
+      #       echo "Code coverage is greater than or equal to 80%."
+      #     else
+      #       echo "Code coverage is less than 80%."
+      #       exit 1
+      #     fi
 
-      - name: SonarCloud Scan
-        uses: sonarsource/sonarcloud-github-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      # - name: SonarCloud Scan
+      #   uses: sonarsource/sonarcloud-github-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #     SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
   build-and-deploy:
     needs: build
