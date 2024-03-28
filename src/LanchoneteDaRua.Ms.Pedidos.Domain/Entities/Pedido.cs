@@ -24,7 +24,7 @@ public class Pedido : AggregateRoot
     public Cliente Cliente { get; private set; }
     public InformacaoDePagamento InformacaoDePagamento { get; private set; }
     public List<PedidoItem> Items { get; private set; }
-    public PedidoStatus Status { get; private set; }
+    public PedidoStatus Status { get; set; }
     public DateTime CriadoEm { get; private set; }
     public DateTime AtualizadoEm { get; private set; }
     

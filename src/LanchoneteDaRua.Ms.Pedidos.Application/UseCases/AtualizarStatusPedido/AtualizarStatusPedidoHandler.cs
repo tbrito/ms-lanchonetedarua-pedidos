@@ -29,11 +29,11 @@ public class AtualizarStatusPedidoHandler : AbstractHandler<AtualizarStatusPedid
 
         if (request.StatusPagamento != "NEGADO")
         {
-            pedido.AvancarParaProximoEstado();
+            pedido.Status = PedidoStatus.PagamentoAprovado;
         }
         else
         {
-            pedido.PagamentoRejeitado();
+            pedido.Status = PedidoStatus.PagamentoRejeitado;
         }
 
         try
